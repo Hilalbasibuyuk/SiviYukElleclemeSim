@@ -61,17 +61,21 @@ public class ValveController : MonoBehaviour
 
     private void NotifyTank()
     {
-        if (tank != null)
-            tank.SetFlowFromValve(GetFlowMultiplier());
-
         OnValveChanged?.Invoke(GetFlowMultiplier());
     }
 
+    // public void OnPumpFlow(float pumpFlow)
+    // {
+    //     float finalFlow = pumpFlow * GetFlowMultiplier();
+    //     tank.SetFlowFromValve(finalFlow);
+    // }
+
     public void OnPumpFlow(float pumpFlow)
     {
-        float finalFlow = pumpFlow * GetFlowMultiplier();
-        tank.SetFlowFromValve(finalFlow);
+        float finalFlow = isOpen ? pumpFlow * openness : 0f;
+        OnValveChanged?.Invoke(finalFlow);
     }
+
 
 
     

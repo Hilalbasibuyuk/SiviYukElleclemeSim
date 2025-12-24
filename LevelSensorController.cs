@@ -13,6 +13,8 @@ public class LevelSensorController : MonoBehaviour
     [Header("Alarm Settings")]
     public float highLevelThreshold = 0.9f;
     public bool alarmTriggered = false;
+    public PumpController pump;
+
 
     public event Action OnHighLevelAlarm;
 

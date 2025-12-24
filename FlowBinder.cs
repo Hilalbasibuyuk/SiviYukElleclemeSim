@@ -3,15 +3,20 @@ using UnityEngine;
 public class FlowBinder : MonoBehaviour
 {
     public ValveController valve;
-    public TankController tank;
+    public TransferController transfer;
+
+    public PumpController pump;
 
     void OnEnable()
     {
-        valve.OnValveChanged += tank.SetFlowFromValve;
+        pump.OnFlowProduced += valve.OnPumpFlow;
+        valve.OnValveChanged += transfer.SetIncomingFlow;
     }
 
     void OnDisable()
     {
-        valve.OnValveChanged -= tank.SetFlowFromValve;
+        pump.OnFlowProduced -= valve.OnPumpFlow;
+        valve.OnValveChanged -= transfer.SetIncomingFlow;
     }
+
 }

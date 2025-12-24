@@ -9,13 +9,52 @@ public class PumpController : MonoBehaviour
     [Header("Pump Settings")]
     public float maxFlowRate = 1f; // %100 debi
 
+    public TankController targetTank;
+
+    public TankController sourceTank;
+    public PumpFault fault = PumpFault.None;
+
+
     public event Action<float> OnFlowProduced;
 
     void Update()
     {
-        float flow = isRunning ? maxFlowRate : 0f;
+        if (!isRunning)
+        {
+            OnFlowProduced?.Invoke(0f);
+            return;
+        }
+
+        if (sourceTank != null && sourceTank.IsEmpty())
+        {
+            fault = PumpFault.DryRun;
+            StopPump();
+            Debug.Log("❌ Pump Dry Run");
+            OnFlowProduced?.Invoke(0f);
+            return;
+        }
+
+        float flow = maxFlowRate;
         OnFlowProduced?.Invoke(flow);
     }
+
+
+    // void Update()
+    // {
+    //     float flow = isRunning ? maxFlowRate : 0f;
+    //     if (targetTank != null)
+    //         targetTank.SetInflow(flow);
+
+    //     OnFlowProduced?.Invoke(flow);
+    // }
+
+    public enum PumpFault
+    {
+        None,
+        DryRun,
+        DeadHead
+    }
+
 
     public void StartPump() => isRunning = true;
     public void StopPump() => isRunning = false;
