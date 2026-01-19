@@ -24,6 +24,7 @@ public class LevelSensorController : MonoBehaviour
 
     void Update()
     {
+        Debug.Log("🟢 LevelSensor Update çalışıyor");
         if (tank == null) return;
 
         currentLevel = tank.GetFillPercent();
@@ -31,6 +32,7 @@ public class LevelSensorController : MonoBehaviour
 
         if (currentLevel >= highLevelThreshold && !alarmTriggered)
         {
+            Debug.Log("🔥 SENSOR ALARM TETİKLEDİ");
             alarmTriggered = true;
             Debug.Log("⚠️ HIGH LEVEL ALARM");
 

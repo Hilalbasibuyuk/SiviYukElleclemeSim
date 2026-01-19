@@ -10,10 +10,19 @@ public class TransferController : MonoBehaviour
     public float transferRate = 10f; // litre / saniye
     public bool isTransferring = true;
     private float currentFlow;
+    private float effectiveFlow;
+
+    [Header("Future Multi Tank")]
+    public TankController[] sourceTanks;
+    public TankController[] targetTanks;
+
 
 
     void Update()
     {
+        Debug.Log($"VALVE FLOW → {currentFlow} | EFFECTIVE → {effectiveFlow}");
+        Debug.Log($"TRANSFER → Source: {sourceTank.name} | Target: {targetTank.name}");
+
         if (!isTransferring) return;
         // if (sourceTank == null || targetTank == null) return;
 
@@ -24,11 +33,20 @@ public class TransferController : MonoBehaviour
             return;
         }
 
-        // Kaynaktan çıkan
-        sourceTank.SetOutflow(transferRate);
+        effectiveFlow = Mathf.Min(currentFlow, transferRate);
 
-        // Hedefe giren
-        targetTank.SetInflow(transferRate);
+        sourceTank.SetOutflow(effectiveFlow);
+        targetTank.SetInflow(effectiveFlow);
+
+        
+
+
+
+        // Kaynaktan çıkan
+        // sourceTank.SetOutflow(transferRate);
+
+        // // Hedefe giren
+        // targetTank.SetInflow(transferRate);
     }
 
     public void StopTransfer()
@@ -42,6 +60,7 @@ public class TransferController : MonoBehaviour
     public void SetIncomingFlow(float flow)
     {
         currentFlow = flow;
+        Debug.Log("TRANSFER FLOW SET: " + flow);
     }
 
 }

@@ -129,6 +129,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5123778}
   - component: {fileID: 5123777}
+  - component: {fileID: 5123779}
+  - component: {fileID: 5123780}
+  - component: {fileID: 5123781}
+  - component: {fileID: 5123782}
   m_Layer: 0
   m_Name: Tank_A
   m_TagString: Untagged
@@ -162,12 +166,104 @@ Transform:
   m_GameObject: {fileID: 5123776}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 60.30305, y: 0.00002, z: 31.4419}
+  m_LocalPosition: {x: 85.4, y: 47.6, z: -35.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5123779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5123776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31d26d2b21884104fa9a24a1ab6f3f8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TankSafetyController
+  tank: {fileID: 5123777}
+  pump: {fileID: 724339035}
+--- !u!23 &5123780
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5123776}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: f38ee1ebb7d354540a669312e980dfe9, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &5123781
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5123776}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &5123782
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5123776}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &83517598
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,54 +339,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 83517598}
   m_CullTransparentMesh: 1
---- !u!1 &83799873
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 83799875}
-  - component: {fileID: 83799874}
-  m_Layer: 0
-  m_Name: AlarmPumpLinker
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &83799874
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 83799873}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d9ad96dc4bf29c40b6086ba87a6a248, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AlarmPumpLinker
-  levelSensor: {fileID: 1138646139}
-  pump: {fileID: 724339035}
-  transfer: {fileID: 1705126454}
-  valve: {fileID: 468396952}
---- !u!4 &83799875
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 83799873}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 55.97438, y: -0, z: 5.15587}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &170027747
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,53 +375,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &362901752
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 362901754}
-  - component: {fileID: 362901753}
-  m_Layer: 0
-  m_Name: 'PumpValveTankBinder '
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &362901753
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 362901752}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b17ce5cfcfabf50468088f2b6fbc2cbd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PumpValveTankBinder
-  pump: {fileID: 724339035}
-  valve: {fileID: 468396952}
-  tank: {fileID: 542535599}
---- !u!4 &362901754
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 362901752}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 55.97438, y: -0, z: 5.15587}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &363104528
 GameObject:
   m_ObjectHideFlags: 0
@@ -674,10 +675,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e38da5969746374c87edbe8b5f4a2fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ValveController
-  openness: 0.958
+  openness: 1
   isOpen: 1
   tank: {fileID: 0}
-  pump: {fileID: 0}
+  pump: {fileID: 724339035}
 --- !u!4 &468396953
 Transform:
   m_ObjectHideFlags: 0
@@ -706,6 +707,7 @@ GameObject:
   - component: {fileID: 542535601}
   - component: {fileID: 542535600}
   - component: {fileID: 542535599}
+  - component: {fileID: 542535604}
   m_Layer: 0
   m_Name: Tank
   m_TagString: Untagged
@@ -823,6 +825,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &542535604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 542535598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31d26d2b21884104fa9a24a1ab6f3f8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TankSafetyController
+  tank: {fileID: 542535599}
+  pump: {fileID: 724339035}
 --- !u!1 &635785347
 GameObject:
   m_ObjectHideFlags: 0
@@ -1143,7 +1159,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PumpController
   isRunning: 1
   maxFlowRate: 1
+  minSafeFlow: 0.05
   targetTank: {fileID: 0}
+  sourceTank: {fileID: 5123777}
+  fault: 0
 --- !u!4 &724339036
 Transform:
   m_ObjectHideFlags: 0
@@ -1338,6 +1357,7 @@ GameObject:
   - component: {fileID: 1068489000}
   - component: {fileID: 1068488999}
   - component: {fileID: 1068488998}
+  - component: {fileID: 1068489002}
   m_Layer: 0
   m_Name: Cube_A
   m_TagString: Untagged
@@ -1391,7 +1411,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: f38ee1ebb7d354540a669312e980dfe9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1438,6 +1458,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1068489002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1068488997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96d82b613c0d71447a17ba9cbacd973e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LiquidController
+  tank: {fileID: 542535599}
+  tankHeight: 10
 --- !u!1 &1116331267
 GameObject:
   m_ObjectHideFlags: 0
@@ -1824,6 +1858,8 @@ MonoBehaviour:
   targetTank: {fileID: 542535599}
   transferRate: 10
   isTransferring: 1
+  sourceTanks: []
+  targetTanks: []
 --- !u!4 &1705126455
 Transform:
   m_ObjectHideFlags: 0
@@ -1906,8 +1942,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AlarmPumpLinker
   levelSensor: {fileID: 1138646139}
   pump: {fileID: 724339035}
-  transfer: {fileID: 0}
-  valve: {fileID: 0}
+  transfer: {fileID: 1705126454}
+  valve: {fileID: 468396952}
 --- !u!4 &1850464146
 Transform:
   m_ObjectHideFlags: 0
@@ -1956,7 +1992,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LiquidController
   tank: {fileID: 5123777}
-  tankHeight: 10
+  tankHeight: 1
 --- !u!65 &1950562181
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2003,7 +2039,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a18136e364f6c3f40ab61829714e811b, type: 2}
+  - {fileID: 2100000, guid: f38ee1ebb7d354540a669312e980dfe9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2045,7 +2081,54 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 85.4, y: 47.6, z: -35.7}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1954396158
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1954396160}
+  - component: {fileID: 1954396159}
+  m_Layer: 0
+  m_Name: FlowBinder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1954396159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1954396158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec027bdb7a66a5f4dab968c82dcf59a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlowBinder
+  valve: {fileID: 468396952}
+  transfer: {fileID: 1705126454}
+  pump: {fileID: 724339035}
+--- !u!4 &1954396160
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1954396158}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -61.90475, y: -368.51074, z: 281.51212}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2080,8 +2163,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DebugUIController
   debugText: {fileID: 378848650}
-  tank: {fileID: 542535599}
-  levelSensor: {fileID: 0}
+  tank: {fileID: 5123777}
+  levelSensor: {fileID: 1138646139}
 --- !u!4 &1976247825
 Transform:
   m_ObjectHideFlags: 0
@@ -2118,5 +2201,4 @@ SceneRoots:
   - {fileID: 1950562184}
   - {fileID: 1705126455}
   - {fileID: 542535603}
-  - {fileID: 83799875}
-  - {fileID: 362901754}
+  - {fileID: 1954396160}

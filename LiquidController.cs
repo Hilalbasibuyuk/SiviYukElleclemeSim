@@ -3,7 +3,7 @@ using UnityEngine;
 public class LiquidController : MonoBehaviour
 {
     public TankController tank;
-    public float tankHeight = 10f;
+    public float tankHeight = 1f;
 
     private Vector3 initialPosition;
 

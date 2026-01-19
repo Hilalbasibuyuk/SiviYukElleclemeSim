@@ -8,6 +8,10 @@ public class PumpController : MonoBehaviour
 
     [Header("Pump Settings")]
     public float maxFlowRate = 1f; // %100 debi
+    [Header("Protection")]
+    public float minSafeFlow = 0.05f;
+
+
 
     public TankController targetTank;
 
@@ -58,4 +62,18 @@ public class PumpController : MonoBehaviour
 
     public void StartPump() => isRunning = true;
     public void StopPump() => isRunning = false;
+
+    void LateUpdate()
+    {
+        if (!isRunning) return;
+
+        // Valve kapalı → debi yok → dead head
+        if (fault == PumpFault.None && maxFlowRate < minSafeFlow)
+        {
+            fault = PumpFault.DeadHead;
+            Debug.Log("❌ DEAD HEAD → Pompa durduruldu");
+            StopPump();
+        }
+    }
+
 }

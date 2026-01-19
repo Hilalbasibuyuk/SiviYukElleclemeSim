@@ -26,10 +26,28 @@ public class TankController : MonoBehaviour
     // 🔔 EVENT
     public event Action<float> OnTankLevelChanged;
 
-    
+    void Start()
+    {
+        liquidLevel = Mathf.Clamp01(liquidLevel);
+        // OnTankLevelChanged(tank.GetFillPercent());
+    }
+
 
     void Update()
     {
+        // ApplyCurrentFlow();
+
+        if (liquidLevel >= 1f)
+        {
+            inflowRate = 0f;
+            currentFlowRate = 0f;
+        }
+
+        if (liquidLevel <= 0f)
+        {
+            outflowRate = 0f;
+        }
+
 
         float netFlow = inflowRate - outflowRate;
 
@@ -88,4 +106,11 @@ public class TankController : MonoBehaviour
     {
         return liquidLevel >= 1f;
     }
+
+    public void ApplyCurrentFlow()
+    {
+        // Valve veya Transfer’den gelen akış burada tanka işlenir
+        SetInflow(currentFlowRate);
+    }
+
 }

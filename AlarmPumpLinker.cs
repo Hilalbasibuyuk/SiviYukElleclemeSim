@@ -17,6 +17,7 @@ public class AlarmPumpLinker : MonoBehaviour
 
     void HandleHighLevelAlarm()
     {
+        Debug.Log("🚨 ALARM LINKER ÇALIŞTI");
         if (pump != null && pump.targetTank != null)
         {
             pump.targetTank.SetInflow(0f);
