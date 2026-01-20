@@ -40,6 +40,11 @@ public class PumpController : MonoBehaviour
 
         float flow = maxFlowRate;
         OnFlowProduced?.Invoke(flow);
+
+        float viscosity = sourceTank.GetViscosity();
+        float adjustedFlow = maxFlowRate / viscosity;
+        OnFlowProduced?.Invoke(adjustedFlow);
+
     }
 
 

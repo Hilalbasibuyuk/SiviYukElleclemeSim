@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class OilBehavior : ILiquidBehavior
 {
     public float Density => 0.9f;
@@ -14,4 +16,9 @@ public class OilBehavior : ILiquidBehavior
         // Sıcaklık arttıkça akış kolaylaşır
         // (ileride genişletilecek)
     }
+    public float GetViscosity(float temperature)
+    {
+        return Mathf.Lerp(3.0f, 1.5f, temperature / 100f);
+    }
+
 }

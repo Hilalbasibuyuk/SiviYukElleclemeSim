@@ -6,5 +6,8 @@ public interface ILiquidBehavior
 
     float Viscosity { get; }
 
+    float GetViscosity(float temperature);
+
+
     void ApplyTemperature(float temperature);
 }

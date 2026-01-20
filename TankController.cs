@@ -13,6 +13,14 @@ public class TankController : MonoBehaviour
     [Header("Flow Settings")]
     public float maxFillRate = 0.2f;
 
+    [Header("Liquid Settings")]
+    public LiquidType liquidType = LiquidType.Water;
+
+    [Header("Thermal State")]
+    public float temperature = 20f;
+
+
+
     [Header("Flow")]
     public float inflowRate = 0f;    // litre / saniye
     public float outflowRate = 0f;
@@ -21,7 +29,11 @@ public class TankController : MonoBehaviour
     public event Action OnUnderflow;
 
 
+
     private float currentFlowRate = 0f;
+
+    private ILiquidBehavior liquidBehavior;
+
 
     // 🔔 EVENT
     public event Action<float> OnTankLevelChanged;
@@ -29,7 +41,7 @@ public class TankController : MonoBehaviour
     void Start()
     {
         liquidLevel = Mathf.Clamp01(liquidLevel);
-        // OnTankLevelChanged(tank.GetFillPercent());
+        InitializeLiquidBehavior();
     }
 
 
@@ -48,8 +60,27 @@ public class TankController : MonoBehaviour
             outflowRate = 0f;
         }
 
+        if (liquidBehavior != null)
+        {
+            liquidBehavior.ApplyTemperature(temperature);
+        }
 
-        float netFlow = inflowRate - outflowRate;
+
+        float modifiedInflow = inflowRate;
+
+        if (liquidBehavior != null)
+        {
+            float viscosity = liquidBehavior.GetViscosity(temperature);
+            modifiedInflow = inflowRate / viscosity;
+        }
+
+        Debug.Log(
+            $"TEMP: {temperature} | VISC: {liquidBehavior.GetViscosity(temperature)} | FLOW: {modifiedInflow}"
+        );
+
+
+        float netFlow = modifiedInflow - outflowRate;
+
 
         liquidLevel += (netFlow / capacity) * Time.deltaTime;
         liquidLevel = Mathf.Clamp01(liquidLevel);
@@ -112,5 +143,38 @@ public class TankController : MonoBehaviour
         // Valve veya Transfer’den gelen akış burada tanka işlenir
         SetInflow(currentFlowRate);
     }
+
+    public void SetTemperature(float value)
+    {
+        temperature = value;
+    }
+    public float GetViscosity()
+    {
+        return liquidBehavior.GetViscosity(temperature);
+    }
+
+
+
+
+    void InitializeLiquidBehavior()
+    {
+        switch (liquidType)
+        {
+            case LiquidType.Water:
+                liquidBehavior = new WaterBehavior();
+                break;
+
+            case LiquidType.Oil:
+                liquidBehavior = new OilBehavior();
+                break;
+
+            case LiquidType.Chemical:
+                liquidBehavior = new ChemicalBehavior();
+                break;
+        }
+
+        liquidBehavior.ApplyTemperature(temperature);
+    }
+
 
 }

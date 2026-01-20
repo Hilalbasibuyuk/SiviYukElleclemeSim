@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class WaterBehavior : ILiquidBehavior
 {
     public float Density => 1.0f;     // referans
@@ -13,4 +15,10 @@ public class WaterBehavior : ILiquidBehavior
     {
         // Su için şimdilik etkisiz
     }
+
+    public float GetViscosity(float temperature)
+    {
+        return Mathf.Lerp(1.2f, 0.8f, temperature / 100f);
+    }
+
 }
