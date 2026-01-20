@@ -28,6 +28,9 @@ public class TankController : MonoBehaviour
     public event Action OnOverflow;
     public event Action OnUnderflow;
 
+    public event System.Action<float> OnTemperatureChanged;
+
+
 
 
     private float currentFlowRate = 0f;
@@ -70,13 +73,10 @@ public class TankController : MonoBehaviour
 
         if (liquidBehavior != null)
         {
-            float viscosity = liquidBehavior.GetViscosity(temperature);
-            modifiedInflow = inflowRate / viscosity;
+            OnTemperatureChanged?.Invoke(temperature);
+
         }
 
-        Debug.Log(
-            $"TEMP: {temperature} | VISC: {liquidBehavior.GetViscosity(temperature)} | FLOW: {modifiedInflow}"
-        );
 
 
         float netFlow = modifiedInflow - outflowRate;
@@ -176,5 +176,23 @@ public class TankController : MonoBehaviour
         liquidBehavior.ApplyTemperature(temperature);
     }
 
+    void OnEnable()
+    {
+        SystemManager.Instance.OnSystemStateChanged += HandleSystemState;
+    }
+
+    void OnDisable()
+    {
+        SystemManager.Instance.OnSystemStateChanged -= HandleSystemState;
+    }
+
+    void HandleSystemState(SystemState state)
+    {
+        if (state != SystemState.Running)
+        {
+            SetInflow(0f);
+            SetOutflow(0f);
+        }
+    }
 
 }

@@ -11,6 +11,9 @@ public class PumpController : MonoBehaviour
     [Header("Protection")]
     public float minSafeFlow = 0.05f;
 
+    public event System.Action<float> OnFlowRateChanged;
+
+
 
 
     public TankController targetTank;
@@ -40,10 +43,6 @@ public class PumpController : MonoBehaviour
 
         float flow = maxFlowRate;
         OnFlowProduced?.Invoke(flow);
-
-        float viscosity = sourceTank.GetViscosity();
-        float adjustedFlow = maxFlowRate / viscosity;
-        OnFlowProduced?.Invoke(adjustedFlow);
 
     }
 
@@ -80,5 +79,33 @@ public class PumpController : MonoBehaviour
             StopPump();
         }
     }
+
+    void OnEnable()
+    {
+        SystemManager.Instance.OnSystemStateChanged += HandleSystemState;
+    }
+
+    void OnDisable()
+    {
+        SystemManager.Instance.OnSystemStateChanged -= HandleSystemState;
+    }
+
+    void HandleSystemState(SystemState state)
+    {
+        switch (state)
+        {
+            case SystemState.Running:
+                StartPump();
+                break;
+
+            case SystemState.Idle:
+            case SystemState.Paused:
+            case SystemState.Fault:
+            case SystemState.EmergencyStop:
+                StopPump();
+                break;
+        }
+    }
+
 
 }

@@ -9,6 +9,7 @@ public class TransferController : MonoBehaviour
     [Header("Transfer Settings")]
     public float transferRate = 10f; // litre / saniye
     public bool isTransferring = true;
+
     private float currentFlow;
     private float effectiveFlow;
 
@@ -16,43 +17,37 @@ public class TransferController : MonoBehaviour
     public TankController[] sourceTanks;
     public TankController[] targetTanks;
 
-
-
     void Update()
     {
-        Debug.Log($"VALVE FLOW → {currentFlow} | EFFECTIVE → {effectiveFlow}");
-        Debug.Log($"TRANSFER → Source: {sourceTank.name} | Target: {targetTank.name}");
-
         if (!isTransferring) return;
-        // if (sourceTank == null || targetTank == null) return;
+        if (sourceTank == null || targetTank == null) return;
 
-        // Güvenlik kontrolleri
+        // Güvenlik
         if (sourceTank.IsEmpty() || targetTank.IsFull())
         {
             StopTransfer();
             return;
         }
 
+        // 1️⃣ Valf + pompadan gelen ham akış
         effectiveFlow = Mathf.Min(currentFlow, transferRate);
 
+        // 2️⃣ FİZİK BURADA → TEK YER
+        float viscosity = sourceTank.GetViscosity();
+        effectiveFlow /= viscosity;
+
+        // 3️⃣ KÜTLE KORUNUMU
         sourceTank.SetOutflow(effectiveFlow);
         targetTank.SetInflow(effectiveFlow);
 
-        
-
-
-
-        // Kaynaktan çıkan
-        // sourceTank.SetOutflow(transferRate);
-
-        // // Hedefe giren
-        // targetTank.SetInflow(transferRate);
+        Debug.Log(
+            $"TRANSFER | RAW: {currentFlow:F2} | VISC: {viscosity:F2} | FINAL: {effectiveFlow:F2}"
+        );
     }
 
     public void StopTransfer()
     {
         isTransferring = false;
-
         sourceTank.SetOutflow(0f);
         targetTank.SetInflow(0f);
     }
@@ -62,5 +57,4 @@ public class TransferController : MonoBehaviour
         currentFlow = flow;
         Debug.Log("TRANSFER FLOW SET: " + flow);
     }
-
 }

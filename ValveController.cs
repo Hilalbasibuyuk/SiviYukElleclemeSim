@@ -76,6 +76,23 @@ public class ValveController : MonoBehaviour
         OnValveChanged?.Invoke(finalFlow);
     }
 
+    void OnEnable()
+    {
+        SystemManager.Instance.OnSystemStateChanged += HandleSystemState;
+    }
+
+    void OnDisable()
+    {
+        SystemManager.Instance.OnSystemStateChanged -= HandleSystemState;
+    }
+
+    void HandleSystemState(SystemState state)
+    {
+        if (state == SystemState.Running)
+            OpenValve();
+        else
+            CloseValve();
+    }
 
 
     
